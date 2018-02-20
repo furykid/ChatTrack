@@ -3,29 +3,7 @@
 const fs = require('fs');
 const readline = require('readline');
 
-// Variable definitions
-//---------------------------------------------------------------------------------------------------
-//---------------------------------------------------------------------------------------------------
-var InputFilePath = 'C:\\Program Files (x86)\\Grinding Gear Games\\Path of Exile\\logs\\Client.txt';
-var StartTime = new Date();
-var TimeDelta = new Date().setDate(StartTime.getDate() - 4);
-//---------------------------------------------------------------------------------------------------
-//---------------------------------------------------------------------------------------------------
-
-
-
-// Function Definitions
-//---------------------------------------------------------------------------------------------------
-//---------------------------------------------------------------------------------------------------
-function GetMessagesInTimeDelta() {
-
-}
-//---------------------------------------------------------------------------------------------------
-//---------------------------------------------------------------------------------------------------
-
-
-
-// Main 
+const InputFilePath = 'C:\\Program Files (x86)\\Grinding Gear Games\\Path of Exile\\logs\\Client.txt';
 
 // Monitor the Client.txt file for changes
 fs.watch(InputFilePath, { encoding: 'buffer' }, (eventType, filename) => {
@@ -48,6 +26,7 @@ fs.watch(InputFilePath, { encoding: 'buffer' }, (eventType, filename) => {
 
                 // We only need to test the time
                 if(lineDate.getTime() > DateDelta.getTime()) {
+                    // DEBUG
                     console.log(`log date: ${lineDate} -- Date Delta: ${DateDelta} `);
                 }
             }
