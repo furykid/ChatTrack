@@ -16,9 +16,11 @@ Params:
     filePath: file path
     timeSpanInDays: Count in days to filter messages
     lineToken: Poe chat line delimeter
-    # = public chat
-    @ = guild chat
-    $ = trade chat
+    Trade = $ 
+    Global = # 
+    Twitch = ^ 
+    Party = % 
+    Whisper = @
 */
 module.exports.TrackLogFile = function(filePath, timeSpanInDays, lineToken) {
     fs.watch(filePath, { encoding: 'buffer' }, (eventType, filename) => {
@@ -50,9 +52,11 @@ Params:
     line: Whole log file text line
     timeSpanInDays: Count in days to filter messages
     lineToken: Poe chat line delimeter
-    # = public chat
-    @ = guild chat
-    $ = trade chat
+    Trade = $ 
+    Global = # 
+    Twitch = ^ 
+    Party = % 
+    Whisper = @
 */
 function ProcessLine(line, lineToken, timeSpanInDays) {
     // The date is the first part of the log
