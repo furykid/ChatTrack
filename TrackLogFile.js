@@ -60,10 +60,19 @@ Params:
 */
 function ProcessLine(line, lineToken, timeSpanInDays) {
     // The date is the first part of the log
-    var lineDate = new Date(line.split(" ", 1));
+    var lineDate = new Date(line.split(" ", 2));
+
+    // Keep blank for err handling the return val
     var message = "";
+
     if(IsLogMessageInRange(timeSpanInDays, lineDate)) {
-        message = line.substring(line.indexOf(lineToken), line.length);
+        // Format our date with local info
+        message = '[' 
+        + lineDate.toLocaleDateString('en-US') 
+        + ' ' 
+        + lineDate.toLocaleTimeString('en-US') 
+        + '] ' 
+        + line.substring(line.indexOf(lineToken), line.length);
     }
     return message;
 }
