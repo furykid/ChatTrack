@@ -7,6 +7,7 @@ const events = require('events');
 
 var LogLineEmitter = new events.EventEmitter();
 module.exports = LogLineEmitter;
+var logFile; // Single instance
 
 /*
 Tracks a poe client.txt file for chat updates. Currently the public API only 
@@ -16,18 +17,26 @@ Params:
     filePath: file path
     timeSpanInDays: Count in days to filter messages
     lineToken: Poe chat line delimeter
-    Trade = $ 
-    Global = # 
-    Twitch = ^ 
-    Party = % 
-    Whisper = @
+        options:
+            Trade = $ 
+            Global = # 
+            Twitch = ^ 
+            Party = % 
+            Whisper = @
 */
 module.exports.TrackLogFile = function(filePath, timeSpanInDays, lineToken) {
     // When this is called, we need to initialize the data, then monitor and update later.
     InitLogList(filePath, timeSpanInDays, lineToken);
-   
-    // Monitor the file for changes
-    fs.watch(filePath, { encoding: 'buffer' }, (eventType, filename) => {
+
+    // We only want a single instance of the file. 
+    // If we don't close it here, it will create a new
+    // instance with the new params... get's messy.
+    if(logFile){
+        logFile.close();
+    }
+
+    // Monitor the new instance for changes
+    logFile = fs.watch(filePath, { encoding: 'buffer' }, (eventType, filename) => {
         if (filename && eventType == 'change') {
             const rl = readline.createInterface({
                 input: fs.createReadStream(filePath),
@@ -46,6 +55,14 @@ module.exports.TrackLogFile = function(filePath, timeSpanInDays, lineToken) {
     });
 }
 
+/*
+Initialized the client with all relevant messages. 
+
+Params:
+    filePath: file path
+    timeSpanInDays: Count in days to filter messages
+    lineToken: Poe chat line delimeter
+*/
 function InitLogList(filePath, timeSpanInDays, lineToken){
     const rl = readline.createInterface({
         input: fs.createReadStream(filePath),
@@ -53,7 +70,6 @@ function InitLogList(filePath, timeSpanInDays, lineToken){
     });
 
     // Fill a list with the data requested, and send to the client
-    var chatList = [];
     rl.on('line', (line) => {
         if(line.search(lineToken) > 0) {
             var message = ProcessLine(line, lineToken, timeSpanInDays);
@@ -74,11 +90,12 @@ Params:
     line: Whole log file text line
     timeSpanInDays: Count in days to filter messages
     lineToken: Poe chat line delimeter
-    Trade = $ 
-    Global = # 
-    Twitch = ^ 
-    Party = % 
-    Whisper = @
+        options:
+            Trade = $ 
+            Global = # 
+            Twitch = ^ 
+            Party = % 
+            Whisper = @
 */
 function ProcessLine(line, lineToken, timeSpanInDays) {
     // The date is the first part of the log
