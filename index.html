@@ -16,9 +16,9 @@
             ul.appendChild(li);
         });
         function onSendData(){
-            var days = document.getElementById("timeSpanInDays").value;
+            var span = document.getElementById("timeSpanInDays").value;
             var token = document.getElementById("chatType").value;
-            socket.emit('sendData', days, token);
+            socket.emit('sendData', {days:span, chatType:token});
         }
     </script> 
 

@@ -19,6 +19,11 @@ server.listen(8080);
 var mainSocket;
 io.on('connect', (socket) => {  
     mainSocket = socket;
+    mainSocket.on('sendData', (data) => {
+        // Test
+        const TestInputFilePath = 'C:\\Program Files (x86)\\Grinding Gear Games\\Path of Exile\\logs\\Client.txt';
+        LogFileTracker.TrackLogFile(TestInputFilePath, data.days, data.chatType);
+    });
 });
 //---------------------------------------------
 //---------------------------------------------
@@ -27,12 +32,6 @@ io.on('connect', (socket) => {
 // Handle data
 //---------------------------------------------
 //---------------------------------------------
-io.on('sendData', (days, token) => {
-    // Test
-    const TestInputFilePath = 'C:\\Program Files (x86)\\Grinding Gear Games\\Path of Exile\\logs\\Client.txt';
-    LogFileTracker.TrackLogFile(TestInputFilePath, days, token);
-});
-
 const events = require('events');
 const LogFileTracker = require('./TrackLogFile');
 
