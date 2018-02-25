@@ -1,24 +1,46 @@
+<!doctype html>
 <html>
-    <script type='text/javascript' src="./PoeChatTrackServer.js"></script>  
+    <script src="/socket.io/socket.io.js"></script>
     <script>
-        var socket = io.connect('/');
-    </script>
+        var socket = io();
+        socket.on('connect', () => {
+            document.getElementById('connectionString').innerHTML = '[Connected to Server]';
+        });
+        socket.on('disconnect', () => {
+            document.getElementById('connectionString').innerHTML = '[Disconnected from Server]';
+        });
+        socket.on('event', (data) => {
+            var ul = document.getElementById('messageList');
+            var li = document.createElement('li');
+            li.appendChild(document.createTextNode(data));
+            ul.appendChild(li);
+        });
+        function onSendData(){
+            var days = document.getElementById("timeSpanInDays").value;
+            var token = document.getElementById("chatType").value;
+            socket.emit('sendData', days, token);
+        }
+    </script> 
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <body>
-        <div class="w3-container">
+        <div>
             <h1>Poe Chat Tracker</h1>
         </div>
-        <div class="w3-container">
-
-        Days to print: <input type="text" name="timeSpanInDays">
-        Chat Type: <input type="text" name="chatType"><br><br>
-
         <div>
-            <p id="test"></p>
+            <text id="connectionString">
         </div>
+        <br><br>
+        <div>
 
-        <textarea rows="30" cols="100" id="messageList">
+        Days to print: <input type="text" id="timeSpanInDays"><br><br>
+        Chat Type: <input type="text" id="chatType"><br><br>
+
+        <button id="submitData" onclick="onSendData()">Send Data</button><br><br>
+
+        <ul id="messageList">
+
+        </ul>>
             
         </textarea>
         </div>
