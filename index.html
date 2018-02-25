@@ -1,0 +1,26 @@
+<html>
+    <script type='text/javascript' src="./PoeChatTrackServer.js"></script>  
+    <script>
+        var socket = io.connect('/');
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <body>
+        <div class="w3-container">
+            <h1>Poe Chat Tracker</h1>
+        </div>
+        <div class="w3-container">
+
+        Days to print: <input type="text" name="timeSpanInDays">
+        Chat Type: <input type="text" name="chatType"><br><br>
+
+        <div>
+            <p id="test"></p>
+        </div>
+
+        <textarea rows="30" cols="100" id="messageList">
+            
+        </textarea>
+        </div>
+    </body>
+</html>
