@@ -33,9 +33,6 @@ var mainSocket;
 io.on('connect', (socket) => {  
     mainSocket = socket;
     mainSocket.on('newParams', (data) => {
-        // First, flush the list
-        mainSocket.emit('flushList');
-
         // Test
         const TestInputFilePath = 'C:\\Program Files (x86)\\Grinding Gear Games\\Path of Exile\\logs\\Client.txt';
         

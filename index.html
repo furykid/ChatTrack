@@ -15,10 +15,8 @@
             li.appendChild(document.createTextNode(data));
             ul.appendChild(li);
         });
-        socket.on('flushList', ()=>{
-            var ul = document.getElementById('messageList').innerHTML = '';
-        })
         function onSendParams(){
+            var ul = document.getElementById('messageList').innerHTML = '';
             var span = document.getElementById("timeSpanInDays").value;
             var token = document.getElementById("chatType").value;
             socket.emit('newParams', {days:span, chatType:token});
