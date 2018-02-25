@@ -9,16 +9,19 @@
         socket.on('disconnect', () => {
             document.getElementById('connectionString').innerHTML = '[Disconnected from Server]';
         });
-        socket.on('event', (data) => {
+        socket.on('list-update', (data) => {
             var ul = document.getElementById('messageList');
             var li = document.createElement('li');
             li.appendChild(document.createTextNode(data));
             ul.appendChild(li);
         });
-        function onSendData(){
+        socket.on('flushList', ()=>{
+            var ul = document.getElementById('messageList').innerHTML = '';
+        })
+        function onSendParams(){
             var span = document.getElementById("timeSpanInDays").value;
             var token = document.getElementById("chatType").value;
-            socket.emit('sendData', {days:span, chatType:token});
+            socket.emit('newParams', {days:span, chatType:token});
         }
     </script> 
 
@@ -36,13 +39,10 @@
         Days to print: <input type="text" id="timeSpanInDays"><br><br>
         Chat Type: <input type="text" id="chatType"><br><br>
 
-        <button id="submitData" onclick="onSendData()">Send Data</button><br><br>
+        <button id="submitData" onclick="onSendParams()">Refresh</button><br><br>
 
         <ul id="messageList">
-
         </ul>>
-            
-        </textarea>
         </div>
     </body>
 </html>

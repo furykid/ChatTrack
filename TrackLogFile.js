@@ -23,13 +23,17 @@ Params:
     Whisper = @
 */
 module.exports.TrackLogFile = function(filePath, timeSpanInDays, lineToken) {
+    // When this is called, we need to initialize the data, then monitor and update later.
+    InitLogList(filePath, timeSpanInDays, lineToken);
+   
+    // Monitor the file for changes
     fs.watch(filePath, { encoding: 'buffer' }, (eventType, filename) => {
-        if (filename && eventType == "change") {
+        if (filename && eventType == 'change') {
             const rl = readline.createInterface({
                 input: fs.createReadStream(filePath),
                 crlfDelay: Infinity
             });
-
+            
             rl.on('line', (line) => {
                 if(line.search(lineToken) > 0) {
                     var message = ProcessLine(line, lineToken, timeSpanInDays);
@@ -38,6 +42,24 @@ module.exports.TrackLogFile = function(filePath, timeSpanInDays, lineToken) {
                     }
                 }
             });
+        }
+    });
+}
+
+function InitLogList(filePath, timeSpanInDays, lineToken){
+    const rl = readline.createInterface({
+        input: fs.createReadStream(filePath),
+        crlfDelay: Infinity
+    });
+
+    // Fill a list with the data requested, and send to the client
+    var chatList = [];
+    rl.on('line', (line) => {
+        if(line.search(lineToken) > 0) {
+            var message = ProcessLine(line, lineToken, timeSpanInDays);
+            if(message){
+                LogLineEmitter.emit('new_log', message);
+            }
         }
     });
 }
