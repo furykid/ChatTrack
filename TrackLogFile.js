@@ -10,19 +10,19 @@ module.exports = LogLineEmitter;
 var logFile; // Single instance
 
 /*
-Tracks a poe client.txt file for chat updates. Currently the public API only 
-supports tracking league info and public stash tabs. 
+    Tracks a poe client.txt file for chat updates. Currently the public API only 
+    supports tracking league info and public stash tabs. 
 
-Params:
-    filePath: file path
-    timeSpanInDays: Count in days to filter messages
-    lineToken: Poe chat line delimeter
-        options:
-            Trade = $ 
-            Global = # 
-            Twitch = ^ 
-            Party = % 
-            Whisper = @
+    Params:
+        filePath: file path
+        timeSpanInDays: Count in days to filter messages
+        lineToken: Poe chat line delimeter
+            options:
+                Trade = $ 
+                Global = # 
+                Twitch = ^ 
+                Party = % 
+                Whisper = @
 */
 module.exports.TrackLogFile = function(filePath, timeSpanInDays, lineToken) {
     // When this is called, we need to initialize the data, then monitor and update later.
@@ -56,12 +56,12 @@ module.exports.TrackLogFile = function(filePath, timeSpanInDays, lineToken) {
 }
 
 /*
-Initialized the client with all relevant messages. 
+    Initialized the client with all relevant messages. 
 
-Params:
-    filePath: file path
-    timeSpanInDays: Count in days to filter messages
-    lineToken: Poe chat line delimeter
+    Params:
+        filePath: file path
+        timeSpanInDays: Count in days to filter messages
+        lineToken: Poe chat line delimeter
 */
 function InitLogList(filePath, timeSpanInDays, lineToken){
     const rl = readline.createInterface({
@@ -81,21 +81,21 @@ function InitLogList(filePath, timeSpanInDays, lineToken){
 }
 
 /*
-Processes a line of log text. The date is extracted and tested
-against the time span param. 
+    Processes a line of log text. The date is extracted and tested
+    against the time span param. 
 
-Return: Returns blank string if the message is out of range.
+    Return: Returns blank string if the message is out of range.
 
-Params:
-    line: Whole log file text line
-    timeSpanInDays: Count in days to filter messages
-    lineToken: Poe chat line delimeter
-        options:
-            Trade = $ 
-            Global = # 
-            Twitch = ^ 
-            Party = % 
-            Whisper = @
+    Params:
+        line: Whole log file text line
+        timeSpanInDays: Count in days to filter messages
+        lineToken: Poe chat line delimeter
+            options:
+                Trade = $ 
+                Global = # 
+                Twitch = ^ 
+                Party = % 
+                Whisper = @
 */
 function ProcessLine(line, lineToken, timeSpanInDays) {
     // The date is the first part of the log
@@ -117,13 +117,13 @@ function ProcessLine(line, lineToken, timeSpanInDays) {
 }
 
 /*
-Tests if log message is in specified range. 
+    Tests if log message is in specified range. 
 
-Return: Returns blank string if the message is out of range.
+    Return: Returns blank string if the message is out of range.
 
-Params:
-    timeSpanInDays: Count in days to filter message
-    lineDate: Date the log message was captured
+    Params:
+        timeSpanInDays: Count in days to filter message
+        lineDate: Date the log message was captured
 */
 function IsLogMessageInRange(timeSpanInDays, lineDate) {
     var bReturnVal = false;
