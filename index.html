@@ -1,5 +1,17 @@
 <!doctype html>
 <html>
+    <head>
+        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+        <title>Poe Chat Tracker</title>
+
+        <style>
+            body {background-color: rgb(111, 116, 104);}
+            h1   {color: rgb(1, 1, 22);}
+            ul   {background-color: rgba(58, 65, 39, 0.219);}
+            ul li{background-color: rgba(231, 207, 195, 0.5); margin:15px;}
+        </style>
+    </head>
+
     <script src="/socket.io/socket.io.js"></script>
     <script>
         var socket = io();
@@ -13,34 +25,42 @@
             var ul = document.getElementById('messageList');
             var li = document.createElement('li');
             li.appendChild(document.createTextNode(data));
-            ul.appendChild(li);
+            ul.insertBefore(li, ul.childNodes[0]);
         });
         function onSendParams(){
             var ul = document.getElementById('messageList').innerHTML = '';
             var span = document.getElementById("timeSpanInDays").value;
-            var token = document.getElementById("chatType").value;
+            var chatTypes = document.getElementsByName('chatType');
+            for(var i in chatTypes){
+                if(chatTypes[i].checked){
+                    token = chatTypes[i].value;
+                }
+            }
             socket.emit('newParams', {days:span, chatType:token});
         }
     </script> 
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <body>
-        <div>
+        <center>
             <h1>Poe Chat Tracker</h1>
-        </div>
-        <div>
-            <text id="connectionString">
-        </div>
-        <br><br>
-        <div>
+            <text id="connectionString"></text><br><br>
+        </center>
 
-        Days to print: <input type="text" id="timeSpanInDays"><br><br>
-        Chat Type: <input type="text" id="chatType"><br><br>
+        Range (days): <input type="text" id="timeSpanInDays" style="width:30px;" value="1"><br><br>
+        
+        <form>
+            <input type="radio" name="chatType" value="@" checked> Whisper<br>
+            <input type="radio" name="chatType" value="$"> Trade<br>
+            <input type="radio" name="chatType" value="#"> Global<br>
+            <input type="radio" name="chatType" value="^"> Twitch<br>
+            <input type="radio" name="chatType" value="%"> Party<br><br>
+        </form>
 
         <button id="submitData" onclick="onSendParams()">Refresh</button><br><br>
 
-        <ul id="messageList">
-        </ul>>
+        <div style="height:300px;overflow:auto;">
+            <ul id="messageList">
+            </ul>>
         </div>
     </body>
 </html>
