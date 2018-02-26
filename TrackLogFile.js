@@ -69,7 +69,6 @@ function InitLogList(filePath, timeSpanInDays, lineToken){
         crlfDelay: Infinity
     });
 
-    // Fill a list with the data requested, and send to the client
     rl.on('line', (line) => {
         if(line.search(lineToken) > 0) {
             var message = ProcessLine(line, lineToken, timeSpanInDays);
