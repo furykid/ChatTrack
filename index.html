@@ -7,8 +7,17 @@
         <style>
             body {background-color: rgb(111, 116, 104);}
             h1   {color: rgb(1, 1, 22);}
-            ul   {background-color: rgba(58, 65, 39, 0.219);}
-            ul li{background-color: rgba(231, 207, 195, 0.5); margin:15px;}
+            ul   {background-color: rgba(58, 65, 39, 0.219);
+                    margin: 7px;
+                    border-radius: 20px;
+                    padding: 20px;
+                    list-style: none;
+            }
+            ul li{background-color: rgba(231, 207, 195, 0.5); 
+                    margin: 7px;
+                    border-radius: 20px;
+                    padding: 10px;
+            }
         </style>
     </head>
 
@@ -51,6 +60,7 @@
         <form>
             <input type="radio" name="chatType" value="@" checked> Whisper<br>
             <input type="radio" name="chatType" value="$"> Trade<br>
+            <input type="radio" name="chatType" value="&"> Guild<br>
             <input type="radio" name="chatType" value="#"> Global<br>
             <input type="radio" name="chatType" value="^"> Twitch<br>
             <input type="radio" name="chatType" value="%"> Party<br><br>
