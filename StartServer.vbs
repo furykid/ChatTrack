@@ -1,0 +1,1 @@
+CreateObject("Wscript.Shell").Run "node PoeChatTrackServer.js", 0
