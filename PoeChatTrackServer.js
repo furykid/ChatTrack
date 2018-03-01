@@ -25,8 +25,8 @@ server.listen(9001);
 const events = require('events');
 const LogFileTracker = require('./TrackLogFile');
 
-// Test
-const TestInputFilePath = 'C:\\Program Files (x86)\\Grinding Gear Games\\Path of Exile\\logs\\Client.txt';
+// Get filepath from cmd arg
+const clientFilePath = process.argv[2];
 
 // List to make sure we don't rewrite messages
 // and reduce chatter.
@@ -44,7 +44,7 @@ io.on('connect', (socket) => {
         chatList = [];
 
         // Init and start tracking log
-        LogFileTracker.TrackLogFile(TestInputFilePath, data.days, data.chatType);
+        LogFileTracker.TrackLogFile(clientFilePath, data.days, data.chatType);
     });
 });
 
