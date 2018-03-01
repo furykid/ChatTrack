@@ -16,13 +16,14 @@ A browser is required to view the data. (Mobile is the expected platform)
 ### Installing
 
 The application runs a lightweight Node.js server that monitors chat records in the <game root dir>/logs/Client.txt file. 
-1. Find the path to that file on your system
-2. Open the StartServer.vbs file and change \<YOUR SYSTEM PATH TO LOG FILE\> to your local path to the file
+1. Download and extract the contents to a folder wherever is most convenient for you.
+2. Find the path to that file on your system
+3. Open the StartServer.vbs file and change \<YOUR SYSTEM PATH TO LOG FILE\> to your local path to the file
 
 Optional:
 
-3. It's easiest to create a shortcut of the file to your desktop, or somewhere easy to find. 
-4. It could also be configured to run automatically using the start programs within windows
+4. It's easiest to create a shortcut of the file to your desktop, or somewhere easy to find. 
+5. It could also be configured to run automatically using the start programs within windows
 
 Finally, just double click the StartServer.vbs file 
 
