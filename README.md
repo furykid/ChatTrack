@@ -27,6 +27,8 @@ Optional:
 
 Finally, just double click the StartServer.vbs file 
 
+NOTE: To shut down the server, you must open the task manager and stop the node.js task
+
 Now, find the IP address of the system where the game lives. Plug that address into a browser, using the port 9001. 
 
 example: http://192.168.123.55:9001
