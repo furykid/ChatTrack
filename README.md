@@ -26,11 +26,13 @@ Optional:
 
 Finally, just double click the StartServer.vbs file 
 
-Now, find the IP address of the system where the game lives. Plug that address into the browser, using the port 9001. 
+Now, find the IP address of the system where the game lives. Plug that address into a browser, using the port 9001. 
 
 example: http://192.168.123.55:9001
 
 (The port can be changed in the code if there is an issue with 9001)
+
+![Screen shot](https://github.com/furykid/ChatTrack/blob/master/PoeChatTrack_Screenshot.jpg "Mobile Screenshot")
 
 ## Known Issues
 
