@@ -17,7 +17,8 @@ steps:
 
 - script: |
     npm install
-  displayName: 'npm install and build'
+    pkg .
+  displayName: 'npm install and pkg'
 
 - task: PublishBuildArtifacts@1
   inputs:
