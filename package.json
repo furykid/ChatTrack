@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Simple in-game Poe chat tracker",
   "main": "PoeChatTrackServer.js",
+  "bin": "PoeChatTrackServer.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
